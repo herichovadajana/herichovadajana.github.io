@@ -9,7 +9,7 @@ site-twitter: "https://twitter.com/herichovadajana" #if your site has a twitter 
 # Author Settings
 author: Dajana Herichova # add your name
 author-img: photo.JPG # add your photo
-about-author: Clojure and CljureScript developer # add description
+about-author: Clojure and ClojureScript developer # add description
 social-twitter: herichovadajana # add your Twitter handle
 social-instagram: dajanka.3d # add your ig handle
 social-github: herichovadajana # github handle
