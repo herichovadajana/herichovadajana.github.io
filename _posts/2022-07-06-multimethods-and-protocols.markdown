@@ -8,9 +8,9 @@ fig-caption: # Add figcaption (optional)
 tags: [clojure, tutorial]
 ---
 
-In Clojure, and in functional languages in general, there are multiple ways to adapt functions to various types (in our case it will be animals). If we need to adapt function to various types, we usually use conditions (if, cond..), and if we want to add new behavior for another type, we need to touch part of code where types are distinguished. 
+In Clojure, and in functional languages in general, there are multiple ways to adapt functions to various input types (in our case it will be animals). If we need to adapt function to different input types, we usually use conditions (if, cond..), and if we want to add new behavior for new input type, we need to touch part of code where types are distinguished. 
 
-I have a function
+For example, I have a function
 
 <script src="https://gist.github.com/46947964f83e15e6a270.js"></script>
 
@@ -26,7 +26,7 @@ and I decided to find out something about Pumpkin and adopt him
 
 <script src="https://gist.github.com/5cd35c3b34f1b0cb1014.js"></script>
 
-I need to add a map for pumpkin, into map of animals and an 'animal language' into tell-me-about-animal function (this animal sound is located in this function because all cats have the same language, so it doesn't make sense to write it with every new cat, or dog .. )
+I need to add a map representing pumpkin, add that into map of animals and modify `tell-me-about-animal` function (sound the animal makes is located in this function because all cats make the same sound, so it doesn't make sense to write it with every new cat, or dog .. )
 
 <script src="https://gist.github.com/4bcda1e07eff41a1e9a2.js"></script>
 
@@ -94,13 +94,13 @@ Result
 
 # Protocols
 
-Since protocols are faster as multimethods, is better use protocols when they are sufficient. In our case are protcols enough as we need to dispatch only on type. But when the dispatching logic gets more complicated, using multimethods is the way to go.
+Since protocols are faster then multimethods, is better use protocols when they are sufficient. In our case, protocols are good enough as we need to dispatch only on type. But when the dispatching logic gets more complicated, using multimethods is the way to go.
 
 #### Create protocol
 
 <script src="https://gist.github.com/05d7afaef6a4c0b787f1.js"></script>
             
-<mark>defprotocol</mark> takes a name and an optional docstring. Method signatures contain method name `(sound)` , argument specification `([this])` , and an optional docstring `("animal language")` . When we want to implement protocol in any way, we always need to implement all protocol methods.
+<mark>defprotocol</mark> takes a name and an optional docstring. Method signatures contain method name `(sound)` , argument specification `([this])` , and an optional docstring `("animal language")` . When we want to implement protocol, we always need to provide implementation for all protocol methods.
             
 <mark> reify</mark> creates a unique anonymous type. It is useful when you need to create single implementation of protocol, which doesn't have a named type.
 
@@ -150,7 +150,7 @@ Result
 
 <script src="https://gist.github.com/d8df0573bf8ad0b3df18.js"></script>
 
-You can work with them like with maps. You can call assoc, dissoc, keys e.t.c on them.
+You can work with them like with maps. You can call assoc, dissoc, keys e.t.c on them, although you have to be careful with dissoc, as it returns plain map instead of record. 
 
 <script src="https://gist.github.com/2e5bd6c0d7f31e3e73e0.js"></script>
 

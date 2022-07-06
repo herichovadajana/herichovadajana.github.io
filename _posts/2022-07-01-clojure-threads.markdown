@@ -9,7 +9,7 @@ tags: [clojure, tutorial]
 ---
 
 Originally I was writing a post about Clojure state management, when I realized, there is one important topic I need to mention. Threads in Clojure. I came into contact with threads in Clojure, when I worked with [quartzite](https://github.com/michaelklishin/quartzite) library .
-It's very interesting topic, and I hope, this post will help you understand threads, and you'll enjoy it.
+It's very interesting topic, and I hope this post will help you understand threads and you'll enjoy it.
 
 &nbsp;
 
@@ -36,7 +36,7 @@ So the program is executing instructions like this :
 
 ![]({{site.baseurl}}/assets/img/threads/3.png#threads)
 
-If we have system with more processors <mark>(multiprocessor system)</mark> , and only one thread , the instructions in thread are executing by only one processor. The second processor is not used.
+If we have system with more processors <mark>(multiprocessor system)</mark> , and only one thread , the instructions in thread are executed by only one processor. The second processor is not used.
 
 &nbsp;
 
@@ -61,7 +61,7 @@ This program can be executed:
 
 ![]({{site.baseurl}}/assets/img/threads/6.png#threads)
 
->NOTE: Remember,there is no guarantee about how the instructions will be executed, so there are multiple possibilities how instructions can be executed, and those are only two of them. It means, the program is <mark>nondeterministic</mark>.
+>NOTE: Remember,there is no guarantee in which order instructions will be executed, so there are multiple possibilities, and we showed only two of them. It means, the program execution order is <mark>nondeterministic</mark>.
 
 
 &nbsp;
@@ -86,7 +86,7 @@ In Clojure you can create new thread using java class `Thread.` - by calling `(.
 
 I will show you simple example of starting new thread.
 
-We have functon named `make-fn` . This funtion takes one argument `text` and as a result returns an anonymous function without an argument. This anonymous function is looping function, and will print numbers from 1 - 10, prepended by `text` (argument from the outer function - as you can see, we are uilizing closures).
+We have functon named `make-fn` . This funtion takes one argument `text` and as a result returns an anonymous function without an argument. This anonymous function is looping function, and will print numbers from 1 - 10, prepended by `text` (argument from the outer function - as you can see, we are utilizing closures).
 
 <script src="https://gist.github.com/d91b2a60f86c7a5d3c3a.js"></script>
 
@@ -103,7 +103,7 @@ Calling `run-in-two-threads!` function:
 
 <script src="https://gist.github.com/cde02575a16ca3c6eaa1.js"></script>
 
-This is only simple explanation of threading principles. But threading is big topic, because there are a lot of ways how you can manage threads, processors and many more. 
-But if you want to know something more, or you think there is something important I forgot to mention, feel free to write a comment.
+This is only simple explanation of threading principles. Off course threading is a big topic, because there are a lot of ways how you can manage threads, processors, etc. 
+If you want to know something more, or you think there is something important I forgot to mention, feel free to write a comment.
 
 
