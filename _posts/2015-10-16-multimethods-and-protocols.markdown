@@ -176,5 +176,3 @@ Result
 
 The end &nbsp; :pig:
 
-
-
