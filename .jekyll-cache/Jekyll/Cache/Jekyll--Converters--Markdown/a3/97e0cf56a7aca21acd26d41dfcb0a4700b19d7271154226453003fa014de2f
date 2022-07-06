@@ -1,0 +1,170 @@
+I"�'<p>This time I’m trying to understand protocols. To be honest, I’ve never heard about protocols till today, but I wanted this knowlege, so I studied, and here’s the result 😊</p>
+
+<h2 id="why-do-we-need-multimethods-and-protocols">Why do we need Multimethods and Protocols?</h2>
+
+<p>In Clojure, and in functional languages in general, there are multiple ways to adapt functions to various types (in our case it will be animals). If we need to adapt function to various types, we usually use conditions (if, cond..), and if we want to add new behavior for another type, we need to touch part of code where types are distinguished.</p>
+
+<p>I have a function</p>
+
+<script src="https://gist.github.com/herichovadajana/46947964f83e15e6a270.js"></script>
+
+<p>Results</p>
+
+<script src="https://gist.github.com/herichovadajana/8917852c3dcf472e88fb.js"></script>
+
+<script src="https://gist.github.com/herichovadajana/1dc7aac1f416e9d342f3.js"></script>
+
+<p>and I decided to find out something about Pumpkin and adopt him</p>
+
+<script src="https://gist.github.com/herichovadajana/5cd35c3b34f1b0cb1014.js"></script>
+
+<p>I need to add a map for pumpkin, into map of animals and an ‘animal language’ into tell-me-about-animal function (this animal sound is located in this function because all cats have the same language, so it doesn’t make sense to write it with every new cat, or dog .. )</p>
+
+<script src="https://gist.github.com/herichovadajana/4bcda1e07eff41a1e9a2.js"></script>
+
+<p>Result</p>
+
+<script src="https://gist.github.com/d452da45dcae3f71a732.js"></script>
+
+<h1 id="multimethods">Multimethods</h1>
+
+<p>In this case, using multimethods makes our code more extensible, because when adding new animal type, we don’t need to touch the <mark style="background-color: #ddead1">tell-me-about-animal</mark> core function, which could be for example located in a library, as such it would be difficult/impossible to modify it. To add a new animal type, we just need to add a new case to our multimethod (defmethod).</p>
+
+<script src="https://gist.github.com/herichovadajana/a8a1aab71011a91a7f32.js"></script>
+
+<p>Results</p>
+
+<script src="https://gist.github.com/herichovadajana/3ab30420559b9dec711c.js"></script>
+
+<script src="https://gist.github.com/herichovadajana/342bb6c1a4f9637e41f3.js"></script>
+
+<p>defmulti creates a new multimethod with dispatch function. In our case we create multimethod with name animal-sound and dispatch function in this multimethod selects keyword :species from argument.</p>
+
+<script src="https://gist.github.com/a4d41601172b0c7b4c0c.js"></script>
+
+<p>defmethod creates and installs new method for mutimethod associated with dispatch value. defmethod animal-sound creates new method for (defmulti animal-sound (fn [my-animal] (:species my-animal)) .</p>
+
+<p>We created three methods:</p>
+
+<p>first method</p>
+
+<script src="https://gist.github.com/herichovadajana/43297e0e6b72898e9d98.js"></script>
+
+<p>is called when returned value from defmulti animal-sound dispatching function is :cat</p>
+
+<p>second method</p>
+
+<script src="https://gist.github.com/herichovadajana/6d9719e15ffedf7f2cbf.js"></script>
+
+<p>is called if when returned value does not match any of the others methods.</p>
+
+<p>example</p>
+
+<p>if we call <span style="background-color:#f2f2f2;"> (animal-sound {:name “Twiggi” :species :dog :home “house” :age 3}) </span> the dispatch function returns value under keyword <span style="background-color:#f2f2f2;"> :species </span>, which is <span style="background-color:#f2f2f2;"> :dog </span>, and the appropriate method is used. Which means returned value will be <span style="background-color:#f2f2f2;"> “Woof” </span></p>
+
+<script src="https://gist.github.com/9ce1d3597716ba311a2a.js"></script>
+
+<p>Now I want to add Pumpkin.</p>
+
+<p>It is pretty simple. I just need to add pumpkin into <span style="background-color:#f2f2f2;"> my-animals </span> map and add new method for species <span style="background-color:#f2f2f2;"> :pig </span>. With every new animal species you need to add only new method. You don’t need to dispatch only on keyword value as we do now, the dispatching logic can be really complicated if you wish (i.e we can dispatch on sum of some arguments, first letters from some string, e.t.c).</p>
+
+<script src="https://gist.github.com/1236ce8c81fbbf0cd591.js"></script>
+
+<p>Result</p>
+
+<script src="https://gist.github.com/d452da45dcae3f71a732.js"></script>
+
+<p>#Protocols</p>
+
+<p>Because protocols are faster than multimethods, we use protocols when they are sufficient. It is used, when you need to dispatch only on type. We still can use multimethods, when the dispatching logic gets more complicated. So in our example it’s better to use protocols, because we need to dispatch only on type.</p>
+
+<p>Create protocol</p>
+
+<script src="https://gist.github.com/05d7afaef6a4c0b787f1.js"></script>
+
+<p>Defprotocol takes a name and optional docstring. Next there are the method signatures. Method signatures contain method name <span style="background-color:#f2f2f2;"> (sound) </span> argument specification <span style="background-color:#f2f2f2;"> ([this]) </span> and an optional docstring <span style="background-color:#f2f2f2;"> (“animal language”) </span>. When we want to implement protocol in any way, we always need to implement all protocol methods.</p>
+
+<p><span style="color:#88cc33;"> reify </span> creates a unique anonymous type. It is useful when you need to create single implementation of protocol, which doesn’t have a named type.&lt;/p&gt;</p>
+
+<script src="https://gist.github.com/e9bbb833a6a7ba9a7cf3.js"></script>
+
+<p>we created one anonymous instance, which implements protocol <span style="background-color:#f2f2f2;"> IAnimal </span> with all protocol methods.</p>
+
+<p>On this instance <span style="background-color:#f2f2f2;"> yeti </span> we can call all protocol methods.</p>
+
+<p>Result</p>
+
+<script src="https://gist.github.com/c1eb0c78b0f6edf5f60d.js"></script>
+
+<p><span style="color:#88cc33;"> deftype </span> creates a named type which implements a protocol.</p>
+
+<script src="https://gist.github.com/e4521ed8bb8046877f3b.js"></script>
+
+<p><span style="background-color:#f2f2f2;"> deftype Goat </span> creates new type which can take arguments (in our example arguments field is empty, because we don’t use them) ,followed by protocol name which we want to implement <span style="background-color:#f2f2f2;"> (IAnimal) </span> and implementation of all protocol methods.</p>
+
+<p>i.e.<span style="background-color:#f2f2f2;"> (sound [this] “Meh”) </span> is protocol implementation for <span style="background-color:#f2f2f2;"> IAnimal </span> method <span style="background-color:#f2f2f2;"> (sound [this] “animal language”) </span></p>
+
+<p><span style="background-color:#f2f2f2;"> (def Kozenka (Goat.)) </span> constructs a new instance of type Goat.</p>
+
+<p>Result</p>
+
+<p><span style="https://gist.github.com/762b69eab48d1e3a67d0.js">&lt;/script&gt;</span></p>
+
+<p>Now we can call method <span style="background-color:#f2f2f2;"> sound </span> on instance <span style="background-color:#f2f2f2;"> Kozenka </span></p>
+
+<p><span style="color:#88cc33;"> defrecord </span> creates a named type which implements protocol and additionaly behaves like map for any arguments passed to constructor (where map keys are argument names, and map values are actual arguments passed when calling a constructor)</p>
+
+<script src="https://gist.github.com/f07bdba7c400a6871852.js"></script>
+
+<p class="blog_title_p">
+  We defined new record of type <span style="background-color:#f2f2f2;"> Cat </span>, with arguments <span style="background-color:#f2f2f2;"> name </span> <span style="background-color:#f2f2f2;"> home </span> <span style="background-color:#f2f2f2;"> age </span>. For this record we implemented <span style="background-color:#f2f2f2;"> IAnimal </span> with all protocol methods.
+  <br />
+  <br />
+  Then we defined new instance of type cat assigned to <span style="background-color:#f2f2f2;"> Siggi </span>, with arguments <span style="background-color:#f2f2f2;"> "Siggy" </span> <span style="background-color:#f2f2f2;"> "House" </span> <span style="background-color:#f2f2f2;"> 1 </span>
+  <br />
+  <br />
+  When we call <span style="background-color:#f2f2f2;"> Siggi </span> , arguments <span style="background-color:#f2f2f2;"> "Siggi" "House" 1 </span> are passed as values for keywords <span style="background-color:#f2f2f2;"> name home age </span> as defined in <span style="background-color:#f2f2f2;"> defrecord Cat </span>.
+  <br />
+  <br />
+  Now we can call all methods (sound, species) on instance <span style="background-color:#f2f2f2;"> Siggi </span>
+  <br />
+  <br />
+  Result
+</p>
+<script src="https://gist.github.com/DajanaStiberova/a33ebfe4104a7806f4bb.js"></script>
+
+<script src="https://gist.github.com/DajanaStiberova/d8df0573bf8ad0b3df18.js"></script>
+
+<p class="blog_title_p">
+  You can work with them like with maps. You can call assoc, dissoc, keys e.t.c on them.
+</p>
+<script src="https://gist.github.com/DajanaStiberova/2e5bd6c0d7f31e3e73e0.js"></script>
+
+<p class="blog_title_p">
+  <span style="color:#88cc33;"> Take a look at our example with protocols </span>
+</p>
+<script src="https://gist.github.com/DajanaStiberova/b5e7864f16fcbf817e31.js"></script>
+
+<p class="blog_title_p">
+  Results
+</p>
+<script src="https://gist.github.com/DajanaStiberova/8917852c3dcf472e88fb.js"></script>
+
+<script src="https://gist.github.com/DajanaStiberova/1dc7aac1f416e9d342f3.js"></script>
+
+<p class="blog_title_p">
+  And now we add pumpkin
+</p>
+<script src="https://gist.github.com/DajanaStiberova/d92618bb44729c1bf430.js"></script>
+
+<p class="blog_title_p">
+  We just added pumpkin into my-animals map and created new defrecord for species pig.
+  <br />
+  <br />
+  Result
+</p>
+<script src="https://gist.github.com/DajanaStiberova/5c3f4cdf56bd921473d3.js"></script>
+
+<p class="blog_title_p">
+  I hope this post helped you understand protocols and multimethods. It was not easy journey for me, but I hope I did it. If you see some incorrect informations or you want to tell something more, or ask someting, feel free to write a comment. </p>
+:ET

@@ -1,0 +1,21 @@
+I"Z<p>This time I’m trying to understand protocols. To be honest, I’ve never heard about protocols till today, but I wanted this knowlege, so I studied, and here’s the result 😊</p>
+
+<h2 id="why-do-we-need-multimethods-and-protocols">Why do we need Multimethods and Protocols?</h2>
+
+<p>In Clojure, and in functional languages in general, there are multiple ways to adapt functions to various types (in our case it will be animals). If we need to adapt function to various types, we usually use conditions (if, cond..), and if we want to add new behavior for another type, we need to touch part of code where types are distinguished.</p>
+
+<p>I have a function</p>
+
+<script src="https://gist.github.com/herichovadajana/46947964f83e15e6a270.js"></script>
+
+<p>Results</p>
+
+<script src="https://gist.github.com/DajanaStiberova/8917852c3dcf472e88fb.js"></script>
+
+<script src="https://gist.github.com/DajanaStiberova/1dc7aac1f416e9d342f3.js"></script>
+
+<p>and I decided to find out something about Pumpkin and adopt him</p>
+
+<script src="https://gist.github.com/DajanaStiberova/5cd35c3b34f1b0cb1014.js"></script>
+
+:ET
