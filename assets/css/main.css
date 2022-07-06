@@ -90,6 +90,12 @@ pre {
     /* 2 */
 }
 
+em {
+    color: gray;
+    font-size: 14px;
+    font-style: normal;
+}
+
 /* Text-level semantics
    ========================================================================== */
 /**
@@ -100,7 +106,13 @@ a {
     background-color: transparent;
     /* 1 */
     -webkit-text-decoration-skip: objects;
+    color: #27a8e0;
+    text-decoration: none;
     /* 2 */
+}
+
+a :hover {
+    text-decoration: underline;
 }
 
 /**
@@ -212,6 +224,12 @@ audio:not([controls]) {
  */
 img {
     border-style: none;
+}
+
+img[src*="#threads"] {
+    max-width: 60%;
+    
+
 }
 
 /**
@@ -1484,6 +1502,10 @@ a.newer-posts:hover {
         max-width:300px;
         overflow:auto;
     }
+    img[src*="#threads"] {
+        max-width: 100%;
 
-    
+    }
+
+
 }
