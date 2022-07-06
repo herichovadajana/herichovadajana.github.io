@@ -16,8 +16,9 @@ social-github: herichovadajana # github handle
 social-linkedin: herichovadajana # add your Linkedin handle
 social-email: dajana.herichova@gmail.com # add your Email address
 
-# Disqus
-discus-identifier: Dajana Herichova # add your discus identifier
+# Talkyard
+
+talkyard_server_url: https://comments-for-herichovadajana-github-io.talkyard.net
 
 # Tracker
 analytics: # Google Analytics
