@@ -1481,7 +1481,7 @@ a.newer-posts:hover {
     }
 
     .gist {
-        max-width:350px;
+        max-width:300px;
         overflow:auto;
     }
 
