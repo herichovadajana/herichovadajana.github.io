@@ -201,6 +201,11 @@ sup {
     top: -0.5em;
 }
 
+#example {
+    color: #5eaf14;
+    font-size: 15px;
+}
+
 /* Embedded content
    ========================================================================== */
 /**
@@ -228,7 +233,7 @@ img {
 
 img[src*="#threads"] {
     max-width: 60%;
-    
+
 
 }
 
