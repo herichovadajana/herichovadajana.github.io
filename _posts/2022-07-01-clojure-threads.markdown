@@ -86,7 +86,7 @@ In Clojure you can create new thread using java class `Thread.` - by calling `(.
 
 I will show you simple example of starting new thread.
 
-We have functon named `make-fn` . This funtion takes one argument `text` and as a result returns an anonymous function without an argument. This anonymous function is looping function, and will print numbers from 1 - 10, prepended by `text` (argument from the outer function - as you can see, we are utilizing closures).
+We have functon named `make-fn` . This funtion takes one argument `text` and as a result returns an anonymous function without an argument. This anonymous function is looping function, and will print numbers from 1 - 10, prepended by `text` (argument from the outer function - as you can see, we are utilizing [closures](../closure-in-clojure) ).
 
 <script src="https://gist.github.com/d91b2a60f86c7a5d3c3a.js"></script>
 
