@@ -1564,5 +1564,13 @@ ul.list-archives {
 
     }
 
-
+    #navbar {
+	width: 70%;
+	margin: auto;
+    }
+    
+    .tags {
+	width: 30%;
+    }
+    
 }
