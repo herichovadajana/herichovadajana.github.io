@@ -11,7 +11,7 @@ discussion_id: 2022-06-28
 
 My solutions for 4clojure exercises.
 
-List is not complete yet, because I am still working on it.
+List is not complete yet, because I'm still working on it.
 
 # 4clojure solutions
 
