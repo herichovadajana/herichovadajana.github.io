@@ -3,7 +3,7 @@ layout: post
 title: Multimethods and Protocols
 date: 2022-07-06 01:00:00 +0300
 description: In Clojure, and in functional languages in general, there are multiple ways to adapt functions to various types (in our case it will be animals). If we need to adapt function to various types, we usually use conditions (if, cond..), and if we want to add new behavior for another type, we need to touch part of code where types are distinguished. 
-img: multimethods-and-protocols/tp.jpg # Add image post (optional)
+img: multimethods-and-protocols/tp.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [clojure, tutorial]
 ---
