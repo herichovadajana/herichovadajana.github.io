@@ -6,6 +6,7 @@ description: Originally I was writing a post about Clojure state management when
 img: threads/tp.jpg # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [clojure, tutorial]
+discussion_id: 2022-07-01 
 ---
 
 Originally I was writing a post about Clojure state management, when I realized, there is one important topic I need to mention. Threads in Clojure. I came into contact with threads in Clojure, when I worked with [quartzite](https://github.com/michaelklishin/quartzite) library .

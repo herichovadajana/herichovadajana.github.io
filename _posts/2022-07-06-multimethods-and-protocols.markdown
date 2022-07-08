@@ -6,6 +6,7 @@ description: In Clojure, and in functional languages in general, there are multi
 img: multimethods-and-protocols/tp.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [clojure, tutorial]
+discussion_id: 2022-07-06
 ---
 
 In Clojure, and in functional languages in general, there are multiple ways to adapt functions to various input types (in our case it will be animals). If we need to adapt function to different input types, we usually use conditions (if, cond..), and if we want to add new behavior for new input type, we need to touch part of code where types are distinguished. 

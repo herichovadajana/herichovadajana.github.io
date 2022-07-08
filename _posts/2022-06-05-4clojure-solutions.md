@@ -1,11 +1,12 @@
 ---
 layout: post
 title: 4clojure solutions
-date: 2022-06-05 01:00:00 +0300
+date: 2022-06-28 01:00:00 +0300
 description: My solutions for 4clojure exercises.
 img: clojure.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [clojure, tutorial]
+discussion_id: 2022-06-28
 ---
 
 My solutions for 4clojure exercises.
