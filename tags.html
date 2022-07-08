@@ -3,6 +3,15 @@ layout: main
 title: Tags
 permalink: /tags/
 ---
+
+{% if site.prefer_datetime_locale == 'en' or lang == 'en' %}
+{% assign df_strftime_m = '%B' %}
+{% assign df_dayjs_m = 'MMM' %}
+{% else %}
+{% assign df_strftime_m = '/ %m' %}
+{% assign df_dayjs_m = '/ MM' %}
+{% endif %}
+
 {% capture site_tags %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
 {% assign tag_words = site_tags | split:',' | sort %}
 
@@ -21,7 +30,7 @@ permalink: /tags/
     {% for post in site.tags[this_word] %}{% if post.title != null %}
     <div class="tag-list">
         <span><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></span>
-        <small><span>| {{ post.date | date_to_string }}</span></small>
+        <small><span>| {{ post.date | date: "%d %B %Y" }}</span></small>
     </div>
     {% endif %}{% endfor %}
   {% endfor %}
