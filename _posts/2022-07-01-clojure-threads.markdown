@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Threads in Clojure
+title: Working with threads
 date: 2022-07-01 01:00:00 +0300
 description: Originally I was writing a post about Clojure state management when I realized there is one important topic I need to mention. Threads in Clojure.
 img: threads/tp.jpg # Add image post (optional)
