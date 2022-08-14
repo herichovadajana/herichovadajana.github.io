@@ -9,10 +9,6 @@ tags: [clojure, tutorial]
 discussion_id: 2022-06-28
 ---
 
-My solutions for 4clojure exercises.
-
-List is not complete yet, because I'm still working on it.
-
 # 4clojure solutions
 
 ##### Problem 1
@@ -511,6 +507,29 @@ Function Composition
        (apply (last fns) args)))))
 ```
 
+##### Problem 59
+Juxtaposition
+
+```clojure
+(fn [& fns]
+  (fn [& args]
+    (reduce #(conj %1 (apply %2 args)) [] fns)))
+
+```
+
+##### Problem 60
+
+```clojure
+	(fn problem60
+  ([f coll]
+   (problem60 f (first coll) (rest coll)))
+  ([f init coll]
+   (if (seq coll)
+     (cons init (lazy-seq (problem60 f (f init (first coll)) (rest coll))))
+     (list init))))
+
+```
+
 ##### Problem 61
 Map Construction
 
@@ -546,6 +565,21 @@ Intro to reduce
 +
 ```
 
+##### Problem 65
+Black Box Testing
+
+```clojure
+#(let [empty-coll (empty %)
+       coll-with-items (conj empty-coll [1 2] [1 2] [3 4])]
+    (if (= (count coll-with-items) 3)
+      (if (= (first (conj coll-with-items [5 6])) [5 6])
+        :list
+        :vector)
+      (if (contains? coll-with-items 1)
+        :map
+        :set))))
+```
+
 ##### Problem 66
 Greatest Common Divisor
 
@@ -558,11 +592,47 @@ Greatest Common Divisor
      (recur b r (rem b r))))
 ```
 
+#### Problem 67
+
+```clojure
+(fn problem67
+  ([count-nr] (problem67 count-nr 3 [2]))
+  ([count-nr test-nr coll]
+   (if (= (count coll) count-nr)
+     coll
+     (if (some #(integer? (/ test-nr %)) coll)
+         (recur count-nr (inc test-nr) coll)
+         (recur count-nr (inc test-nr) (conj coll test-nr))))))
+```
+
 ##### Problem 68
 Recurring Theme
 
 ```clojure
 [7 6 5 4 3]
+```
+
+##### Problem 69
+Merge with a function
+
+```clojure
+(fn [f & args]
+  (into {} (map (fn [[k v]]                                                                                                                                                                                                                                                                                                
+                  {k (if (> (count (vals v)) 1)                                                                                                                                                                                                                                                                            
+                       (apply f (vals v))                                                                                                                                                                                                                                                                                  
+                       (first (vals v)))})                                                                                                                                                                                                                                                                                 
+                (->> args                                                                                                                                                                                                                                                                                                  
+                     (apply concat)                                                                                                                                                                                                                                                                                        
+                     (group-by first)))))
+```
+
+##### Problem 70
+Word Sortinf
+
+```clojure
+(sort-by clojure.string/lower-case (-> s
+                                       (clojure.string/replace #"[.!?]" "")
+                                       (clojure.string/split #" "))))
 ```
 
 ##### Problem 71
@@ -577,6 +647,34 @@ Rearranging Code: ->>
 
 ```clojure
 reduce +
+```
+##### Problem 74
+Filter Perfect Squares
+
+```clojure
+(fn problem74 [string-of-integers]
+  (let [lazy-prime (filter (fn [nr]
+                             (not-any? #(zero? (mod nr %))
+                                       (range 2 (dec nr)))) (iterate inc 2))]
+    (letfn [(prime-factorization
+              ([nr] (prime-factorization nr (take-while #(>= nr %) lazy-prime) []))
+              ([nr primes prime-factors]
+               (let [prime-number (first primes)
+                     quotient (/ nr prime-number)]
+                 (if (= quotient 1)
+                   (conj prime-factors prime-number)
+                   (if (integer? quotient)
+                     (recur quotient primes (conj prime-factors prime-number))
+                     (recur nr (rest primes) prime-factors))))))
+            (is-perfect-square? [nr]
+              (not-any? (fn [[k v]]
+                          (odd? v))
+                        (frequencies (prime-factorization nr))))]
+      (clojure.string/join ","
+                           (filter #(->> %
+                                         read-string
+                                         is-perfect-square?) 
+	                                (clojure.string/split string-of-integers #","))))))
 ```
 
 ##### Problem 81
