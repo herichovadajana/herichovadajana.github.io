@@ -1,0 +1,112 @@
+#app {
+    background-color: #222;
+    height: 500px;
+    width: 900px;
+    margin-bottom: 20px;
+}
+
+td.cell {
+    background-color: rgba(0, 0, 0, 0.71);
+
+}
+
+.score {
+    color: rgba(255, 255, 255, 0.5); important!
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 20px;
+}
+
+.stage {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    position: relative;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    margin-bottom: 25px;
+}
+
+table {
+    border-spacing: 2px;
+    -webkit-border-horizontal-spacing: 2px;
+    -webkit-border-vertical-spacing: 2px;
+    border-collapse: separate;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    :display: table;
+}
+
+.snake-on-cell {
+    background-color: #e30b5c;
+}
+
+.point {
+    background-color: rgb(119, 255, 51);
+}
+
+.overlay {
+    position: absolute;
+    width: 900px;
+    height: 500px;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.5); /*dim the background*/
+}
+
+.play {
+    height: 100px;
+    width: 80px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    z-index: 20;
+    cursor: pointer;
+    margin-top:170px;
+
+}
+
+.play h1 {
+    font-size: 100px;
+}
+
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.play h1 {
+    font-size: 100px;
+    margin-top: -20px;
+}
+
+table {
+    border-color: #222;
+    background-color: rgba(0, 0, 0, 0.71);
+}
+
+table td {
+    border: 1px solid #222; important!
+}
+
+table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.71);
+}
+
+img[src*="#snake-game"] {
+   width: 600px;
+   max-height: 600px;
+   text-align: center;
+}
